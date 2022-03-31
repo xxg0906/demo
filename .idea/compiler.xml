@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="gateway" />
+        <module name="sys-feign" />
+        <module name="project" />
+        <module name="service" />
+        <module name="auth" />
+        <module name="mysql" />
+        <module name="base" />
+        <module name="sys" />
+        <module name="sys-service" />
+        <module name="sys-api" />
+        <module name="generator" />
+        <module name="core" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api" target="17" />
+      <module name="auth" target="1.5" />
+      <module name="base" target="1.5" />
+      <module name="common" target="1.5" />
+      <module name="core" target="1.5" />
+      <module name="demo" target="1.5" />
+      <module name="gateway" target="17" />
+      <module name="generator" target="1.5" />
+      <module name="mysql" target="1.5" />
+      <module name="project" target="1.5" />
+      <module name="service" target="17" />
+      <module name="sys" target="1.5" />
+      <module name="sys-api" target="1.5" />
+      <module name="sys-feign" target="1.5" />
+      <module name="sys-service" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api" options="-parameters" />
+      <module name="auth" options="" />
+      <module name="base" options="" />
+      <module name="common" options="" />
+      <module name="core" options="" />
+      <module name="demo" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="generator" options="" />
+      <module name="mysql" options="" />
+      <module name="project" options="" />
+      <module name="service" options="-parameters" />
+      <module name="sys" options="" />
+      <module name="sys-api" options="" />
+      <module name="sys-feign" options="" />
+      <module name="sys-service" options="" />
+    </option>
+  </component>
+</project>
