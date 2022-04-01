@@ -3,7 +3,7 @@ package ${package.Entity};
 <#list table.importPackages as pkg>
 import ${pkg};
 </#list>
-<#if swagger>
+<#if swagger2>
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 </#if>
@@ -35,10 +35,10 @@ import lombok.experimental.Accessors;
     </#if>
 </#if>
 <#if table.convert>
-@TableName("${schemaName}${table.name}")
+@TableName("${table.name}")
 </#if>
-<#if swagger>
-@ApiModel(value = "${entity}对象", description = "${table.comment!}")
+<#if swagger2>
+@ApiModel(value="${entity}对象", description="${table.comment!}")
 </#if>
 <#if superEntityClass??>
 public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}></#if> {
@@ -58,7 +58,7 @@ public class ${entity} implements Serializable {
     </#if>
 
     <#if field.comment!?length gt 0>
-        <#if swagger>
+        <#if swagger2>
     @ApiModelProperty(value = "${field.comment}")
         <#else>
     /**
@@ -87,11 +87,11 @@ public class ${entity} implements Serializable {
     @TableField("${field.annotationColumnName}")
     </#if>
     <#-- 乐观锁注解 -->
-    <#if field.versionField>
+    <#if (versionFieldName!"") == field.name>
     @Version
     </#if>
     <#-- 逻辑删除注解 -->
-    <#if field.logicDeleteField>
+    <#if (logicDeleteFieldName!"") == field.name>
     @TableLogic
     </#if>
     private ${field.propertyType} ${field.propertyName};

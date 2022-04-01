@@ -6,6 +6,7 @@
         <artifactId>base</artifactId>
         <groupId>top.xxgo</groupId>
         <version>1.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>generator</artifactId>
     <version>1.0</version>
@@ -33,7 +34,7 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.5.0</version>
+            <version>3.4.1</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -56,6 +57,17 @@
             <version>2.3</version>
         </dependency>
 
+        <dependency>
+            <groupId>top.xxgo</groupId>
+            <artifactId>mysql</artifactId>
+            <version>#{project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>top.xxgo</groupId>
+            <artifactId>project</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -63,6 +75,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

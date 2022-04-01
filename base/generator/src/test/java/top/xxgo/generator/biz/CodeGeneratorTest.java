@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import top.xxgo.generator.pojo.DbInfo;
 import top.xxgo.generator.pojo.GeneratorDto;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author xxg
@@ -13,11 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class CodeGeneratorTest {
 
 
-    @Test
-    public  void gen(){
+    public static void main(String[] args) {
         CodeGeneratorService codeGeneratorService = new CodeGeneratorService();
         DbInfo dbInfo = DbInfo.builder()
-                .url("jdbc:mysql://localhost:3306/xxgo-sys??useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai")
+                .url("jdbc:mysql://localhost:3306/xxgo-sys?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true")
                 .userName("root")
                 .password("123456")
                 .build();
@@ -31,6 +29,11 @@ class CodeGeneratorTest {
                 .dbInfo(dbInfo)
                 .build();
         codeGeneratorService.generate(generatorDto);
+    }
+
+    @Test
+    public  void gen(){
+
     }
 
 

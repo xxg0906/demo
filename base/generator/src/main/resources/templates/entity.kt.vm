@@ -3,7 +3,7 @@ package ${package.Entity};
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
 #end
-#if(${swagger})
+#if(${swagger2})
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 #end
@@ -16,10 +16,10 @@ import io.swagger.annotations.ApiModelProperty;
  * @since ${date}
  */
 #if(${table.convert})
-@TableName("${schemaName}${table.name}")
+@TableName("${table.name}")
 #end
-#if(${swagger})
-@ApiModel(value = "${entity}对象", description = "$!{table.comment}")
+#if(${swagger2})
+@ApiModel(value="${entity}对象", description="$!{table.comment}")
 #end
 #if(${superEntityClass})
 class ${entity} : ${superEntityClass}#if(${activeRecord})<${entity}>#end() {
@@ -35,7 +35,7 @@ class ${entity} : Serializable {
 #set($keyPropertyName=${field.propertyName})
 #end
 #if("$!field.comment" != "")
-    #if(${swagger})
+    #if(${swagger2})
     @ApiModelProperty(value = "${field.comment}")
     #else
     /**
@@ -64,11 +64,11 @@ class ${entity} : Serializable {
     @TableField("${field.annotationColumnName}")
 #end
 ## 乐观锁注解
-#if(field.versionField)
+#if(${versionFieldName}==${field.name})
     @Version
 #end
 ## 逻辑删除注解
-#if(field.logicDeleteField)
+#if(${logicDeleteFieldName}==${field.name})
     @TableLogic
 #end
     #if(${field.propertyType} == "Integer")

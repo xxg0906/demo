@@ -5,11 +5,12 @@
     <parent>
         <artifactId>demo</artifactId>
         <groupId>top.xxgo</groupId>
-        <version>${project-vesion}</version>
+        <version>1.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>base</artifactId>
-    <version>${project-vesion}</version>
+    <version>1.0</version>
+    <packaging>pom</packaging>
     <name>base</name>
     <description>base</description>
 

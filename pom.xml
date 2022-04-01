@@ -5,7 +5,7 @@
 
 	<groupId>top.xxgo</groupId>
 	<artifactId>demo</artifactId>
-	<version>${project-vesion}</version>
+	<version>1.0</version>
 	<packaging>pom</packaging>
 	<name>demo</name>
 	<description>Demo project</description>
@@ -19,6 +19,8 @@
 		<spring-cloud-dependencies-version>2021.0.1</spring-cloud-dependencies-version>
 		<spring-boot-dependencies-version>2.6.4</spring-boot-dependencies-version>
 		<spring-cloud-alibaba-dependencies-version>2021.1</spring-cloud-alibaba-dependencies-version>
+		<maven.compiler.source>8</maven.compiler.source>
+		<maven.compiler.target>8</maven.compiler.target>
 	</properties>
 
 	<dependencyManagement>

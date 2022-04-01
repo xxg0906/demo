@@ -1,7 +1,10 @@
 package top.xxgo.generator.biz;
 
+import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
+import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import org.springframework.stereotype.Service;
@@ -10,7 +13,9 @@ import top.xxgo.generator.pojo.GeneratorDto;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,13 +29,14 @@ public class CodeGeneratorService {
     private static final String BASE_PATH = "top.xxgo";
 
     public boolean generate(GeneratorDto generatorDto) {
-        AutoGenerator autoGenerator = new AutoGenerator(getDataSourceConfig(generatorDto));
-        autoGenerator.global(getGlobalConfig(generatorDto))
-                .packageInfo(getPackageConfig(generatorDto))
-                .strategy(getStrategyConfig(generatorDto))
-                .injection(getInjectionConfig(generatorDto))
-                .template(getTemplateConfig(generatorDto))
-                .execute();
+        AutoGenerator autoGenerator = new AutoGenerator();
+        autoGenerator.setDataSource(getDataSourceConfig(generatorDto));
+        autoGenerator.setGlobalConfig(getGlobalConfig(generatorDto));
+        autoGenerator.setPackageInfo(getPackageConfig(generatorDto));
+        autoGenerator.setStrategy(getStrategyConfig(generatorDto));
+        autoGenerator.setCfg(getInjectionConfig(generatorDto));
+        autoGenerator.setTemplate(getTemplateConfig(generatorDto));
+        autoGenerator.execute();
         return true;
     }
 
@@ -41,20 +47,25 @@ public class CodeGeneratorService {
     }
 
     private static InjectionConfig getInjectionConfig(GeneratorDto generatorDto) {
-        InjectionConfig injectionConfig = new InjectionConfig();
+        InjectionConfig injectionConfig = new InjectionConfig() {
+            @Override
+            public void initMap() {
+
+            }
+        };
         Map<String, Object> map = new HashMap<>(4);
         map.put("dateTime", getDateTime());
         final String projectPath = System.getProperty("user.dir");
-//        List<FileOutConfig> fileOutConfigList = new ArrayList<FileOutConfig>();
-//        // 自定义配置会被优先输出
-//        fileOutConfigList.add(new FileOutConfig("/templates/mapper.xml.vm") {
-//            @Override
-//            public String outputFile(TableInfo tableInfo) {
-//                // 自定义输出文件名，如果entity设置了前后缀，此次注意xml的名称也会跟着发生变化
-//                return projectPath + "/src/main/resources/mapper/" +
-//                        moduleName + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
-//            }
-//        });
+        List<FileOutConfig> fileOutConfigList = new ArrayList<>();
+        // 自定义配置会被优先输出
+        fileOutConfigList.add(new FileOutConfig("templates/mapper.xml.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                // 自定义输出文件名，如果entity设置了前后缀，此次注意xml的名称也会跟着发生变化
+                return projectPath + "/gen/"+generatorDto.getModuleName()+"/src/main/resources/mapper/" +tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+            }
+        });
+        injectionConfig.setFileOutConfigList(fileOutConfigList);
 //        injectionConfig.
 //        setFileOutConfigList(fileOutConfigList);
         return  injectionConfig;
@@ -65,59 +76,71 @@ public class CodeGeneratorService {
 
 
     private static StrategyConfig getStrategyConfig(GeneratorDto generatorDto) {
-        StrategyConfig.Builder builder = new StrategyConfig.Builder()
-                .addInclude(generatorDto.getTableName())
-                .addTablePrefix(generatorDto.getTablePrefix() + "_");
-        builder.entityBuilder()
-                .naming(NamingStrategy.underline_to_camel)
-                .columnNaming(NamingStrategy.underline_to_camel)
-                .enableTableFieldAnnotation()
-                .enableLombok()
-                .enableRemoveIsPrefix();
-        builder.controllerBuilder().enableHyphenStyle().enableRestStyle();
-        return builder.build();
+        StrategyConfig strategyConfig = new StrategyConfig();
+        strategyConfig
+//                .setInclude(generatorDto.getTableName())
+                .setTablePrefix(generatorDto.getTablePrefix() + "_")
+                .setNaming(NamingStrategy.underline_to_camel)
+                .setColumnNaming(NamingStrategy.underline_to_camel)
+                .setEntityLombokModel(true)
+                .setEntityBooleanColumnRemoveIsPrefix(true)
+                .setEntityTableFieldAnnotationEnable(true)
+                .setRestControllerStyle(true)
+                .setSuperEntityClass("top.xxgo.common.base.BaseDataEntity")
+                .setSuperControllerClass("top.xxgo.project.version.BaseController")
+                .setSuperServiceClass(  "top.xxgo.common.base.PagedBaseService ")
+                .setSuperServiceImplClass("top.xxgo.common.base.PagedBaseServiceImpl")
+                .setSuperMapperClass("top.xxgo.common.base.PageMapper")
+        ;
+         return strategyConfig;
     }
 
     private static PackageConfig getPackageConfig(GeneratorDto generatorDto) {
-        return new PackageConfig.Builder().moduleName(generatorDto.getModuleName())
-                .parent(BASE_PATH).build();
-
+        return new PackageConfig()
+                .setModuleName(generatorDto.getModuleName())
+                .setController("controller.rest")
+                .setEntity("model.entity")
+                .setParent(BASE_PATH);
     }
 
     private DataSourceConfig getDataSourceConfig(GeneratorDto generatorDto) {
         DbInfo dbInfo = generatorDto.getDbInfo();
-        return new DataSourceConfig
-                .Builder(dbInfo.getUrl(), dbInfo.getUserName(), dbInfo.getPassword())
-                .build();
+        DataSourceConfig dataSourceConfig = new DataSourceConfig().setUrl(dbInfo.getUrl())
+                .setUsername(dbInfo.getUserName())
+                .setPassword(dbInfo.getPassword())
+                .setDriverName("com.mysql.cj.jdbc.Driver");
+        dataSourceConfig.setSchemaName("");
+        return dataSourceConfig;
     }
 
     private static GlobalConfig getGlobalConfig(GeneratorDto generatorDto) {
         String projectPath = System.getProperty("user.dir");
-        String filePath = projectPath + "/" + generatorDto.getModuleName() + "src/main/java";
+        String filePath = projectPath + "/gen/" + generatorDto.getModuleName() + "/src/main/java";
         if (isWindows()) {
             filePath = filePath.replaceAll("/+|\\\\+", "\\\\");
         } else {
             filePath = filePath.replaceAll("/+|\\\\+", "/");
         }
-        return new GlobalConfig.Builder()
-                .outputDir(filePath)
-                .dateType(DateType.ONLY_DATE)
-                .author(generatorDto.getAuthor())
-                .enableSwagger()
-                .openDir(false)
-                .fileOverride()
-                .build();
+        GlobalConfig globalConfig = new GlobalConfig();
+        globalConfig.setOutputDir(filePath);
+        globalConfig.setDateType((DateType.ONLY_DATE));
+        globalConfig.setAuthor(generatorDto.getAuthor());
+        globalConfig.setSwagger2(true);
+        globalConfig.setOpen(false);
+        globalConfig.setFileOverride(true);
+        globalConfig.setBaseResultMap(true);
+
+        return globalConfig;
     }
 
     private static TemplateConfig getTemplateConfig(GeneratorDto generatorDto) {
-        return new TemplateConfig.Builder()
-                .controller("templates/controller.java.vm")
-                .service("templates/service.java.vm",
-                        "templates/serviceImpl.java.vm")
-                .entity("templates/entity.java.vm")
-                .mapper("templates/mapper.java.vm")
-                .mapperXml("/templates/mapper.xml.vm")
-                .build();
+        return new TemplateConfig()
+                .setController("templates/controller.java.vm")
+                .setService("templates/service.java.vm")
+                 .setServiceImpl("templates/serviceImpl.java.vm")
+                .setEntity("templates/entity.java.vm")
+                .setXml(null)
+                .setMapper("templates/mapper.java.vm");
     }
 
 
