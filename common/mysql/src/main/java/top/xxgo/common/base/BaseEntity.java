@@ -1,4 +1,4 @@
-package top.xxgo.common.mysql.base;
+package top.xxgo.common.base;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
