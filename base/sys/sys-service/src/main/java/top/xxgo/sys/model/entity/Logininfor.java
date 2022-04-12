@@ -2,8 +2,8 @@ package top.xxgo.sys.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import top.xxgo.common.base.BaseDataEntity;
 import io.swagger.annotations.ApiModel;
@@ -49,7 +49,7 @@ public class Logininfor extends BaseDataEntity {
 
     @ApiModelProperty(value = "访问时间")
     @TableField("access_time")
-    private Date accessTime;
+    private LocalDateTime accessTime;
 
 
 }

@@ -1,7 +1,7 @@
 package top.xxgo.sys.controller.client;
 
 import com.example.sys.pojo.UserInfo;
-import com.example.sys.rest.SysUserInfoFeign;
+import com.example.sys.feign.SysUserInfoFeign;
 
 /**
  * @author xxg

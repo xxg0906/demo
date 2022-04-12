@@ -1,0 +1,10 @@
+wget https://github.91chi.fun//https://github.com//alibaba/nacos/releases/download/1.4.3/nacos-server-1.4.3.tar.gz
+
+ tar -xvf nacos-server-1.4.3.tar.gz
+
+ vim nacos/conf/application.properties
+
+ 修改端口
+
+ 启动
+ ./nacos/bin/startup.sh -m standalone

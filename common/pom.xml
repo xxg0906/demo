@@ -6,7 +6,7 @@
 		<artifactId>demo</artifactId>
 		<groupId>top.xxgo</groupId>
 		<version>1.0</version>
-		<relativePath>../</relativePath>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>common</artifactId>
 	<version>1.0</version>

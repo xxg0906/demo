@@ -1,0 +1,14 @@
+mkdir /usr/local/soft
+wget https://mirrors.tuna.tsinghua.edu.cn/AdoptOpenJDK/8/jdk/x64/linux/OpenJDK8U-jdk_x64_linux_openj9_linuxXL_8u282b08_openj9-0.24.0.tar.gz
+
+tar -zxvf OpenJDK8U-jdk_x64_linux_openj9_linuxXL_8u282b08_openj9-0.24.0.tar.gz
+
+vim /etc/profile
+
+增加
+export JAVA_HOME=/usr/local/soft/jdk8u282-b08
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export  PATH=${JAVA_HOME}/bin:$PATH
+执行
+source /etc/profile

@@ -2,8 +2,8 @@ package top.xxgo.sys.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import top.xxgo.common.base.BaseDataEntity;
 import io.swagger.annotations.ApiModel;
@@ -81,7 +81,7 @@ public class User extends BaseDataEntity {
 
     @ApiModelProperty(value = "最后登录时间")
     @TableField("login_date")
-    private Date loginDate;
+    private LocalDateTime loginDate;
 
     @ApiModelProperty(value = "创建者")
     @TableField("create_by")
@@ -89,7 +89,7 @@ public class User extends BaseDataEntity {
 
     @ApiModelProperty(value = "创建时间")
     @TableField("create_time")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     @ApiModelProperty(value = "更新者")
     @TableField("update_by")
@@ -97,7 +97,7 @@ public class User extends BaseDataEntity {
 
     @ApiModelProperty(value = "更新时间")
     @TableField("update_time")
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     @ApiModelProperty(value = "备注")
     @TableField("remark")

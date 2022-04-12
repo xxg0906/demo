@@ -1,0 +1,19 @@
+
+yum install redis
+service redis start
+查看进程
+ps -ef |grep redis
+
+查看启动位置
+ls -l /proc/{redisPid}/cwd
+
+进入redis
+redis-cli
+查看信息
+info Server
+配置文件位置
+config_file:/usr/local/etc/redis.conf
+修改配置文件
+删除 bind
+改动 后台进程方式启动 daemonize yes
+requirepass 1aD3F1ff

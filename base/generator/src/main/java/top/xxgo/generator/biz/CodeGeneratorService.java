@@ -97,7 +97,7 @@ public class CodeGeneratorService {
 
     private static PackageConfig getPackageConfig(GeneratorDto generatorDto) {
         return new PackageConfig()
-                .setModuleName(generatorDto.getModuleName())
+//                .setModuleName(generatorDto.getModuleName())
                 .setController("controller.rest")
                 .setEntity("model.entity")
                 .setParent(BASE_PATH);
@@ -129,7 +129,7 @@ public class CodeGeneratorService {
         globalConfig.setOpen(false);
         globalConfig.setFileOverride(true);
         globalConfig.setBaseResultMap(true);
-
+        globalConfig.setDateType(DateType.TIME_PACK);
         return globalConfig;
     }
 

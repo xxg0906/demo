@@ -26,11 +26,15 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>top.xxgo</groupId>
             <artifactId>sys-service</artifactId>
-            <version>${project-vesion}</version>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>top.xxgo</groupId>
+            <artifactId>project</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>top.xxgo</groupId>
@@ -39,6 +43,10 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

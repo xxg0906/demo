@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>demo</artifactId>
+        <artifactId>base</artifactId>
         <groupId>top.xxgo</groupId>
         <version>1.0</version>
         <relativePath>../pom.xml</relativePath>
@@ -12,6 +12,7 @@
     <version>1.0</version>
     <name>sys</name>
     <description>sys</description>
+    <packaging>pom</packaging>
     <properties>
         <java.version>17</java.version>
     </properties>

@@ -2,8 +2,8 @@ package top.xxgo.sys.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import top.xxgo.common.base.BaseDataEntity;
 import io.swagger.annotations.ApiModel;
@@ -57,7 +57,7 @@ public class JobLog extends BaseDataEntity {
 
     @ApiModelProperty(value = "创建时间")
     @TableField("create_time")
-    private Date createTime;
+    private LocalDateTime createTime;
 
 
 }

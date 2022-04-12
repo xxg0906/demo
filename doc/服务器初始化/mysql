@@ -1,0 +1,43 @@
+https://blog.csdn.net/qq_36582604/article/details/80526287
+wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm
+
+
+yum -y install mysql57-community-release-el7-10.noarch.rpm
+
+rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+安装
+yum -y install mysql-community-server
+启动
+systemctl start  mysqld.service
+
+
+grep "password" /var/log/mysqld.log  查看密码
+ password is generated for root@localhost: Gku+F6FHi<=I
+登录
+mysql -uroot -p
+
+修改密码
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'Gku+F26FHi<=I';
+
+开启远程访问
+grant all privileges on *.* to 'root'@'192.168.0.1' identified by 'Gku+F26FHi<=I' with grant option;
+grant all privileges on *.* to 'root'@'%' identified by 'Gku+F26FHi<=I' with grant option;
+刷新
+flush privileges
+
+vi /etc/my.cnf
+增加 ：
+[clinet]
+default-character-set=utf8
+
+port=8003
+
+character-set-server=utf8
+collation-server=utf8_general_ci
+
+重启mysql
+service mysqld restart
+
+进入mysql  ，
+status 查看字符集修改结果
+show global variables like 'port';  查看端口修改结果

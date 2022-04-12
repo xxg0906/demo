@@ -2,8 +2,8 @@ package top.xxgo.sys.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
 import java.sql.Blob;
 import com.baomidou.mybatisplus.annotation.TableField;
 import top.xxgo.common.base.BaseDataEntity;
@@ -42,7 +42,7 @@ public class Notice extends BaseDataEntity {
 
     @ApiModelProperty(value = "公告内容")
     @TableField("notice_content")
-    private Blob noticeContent;
+    private String noticeContent;
 
     @ApiModelProperty(value = "公告状态（0正常 1关闭）")
     @TableField("status")
@@ -54,7 +54,7 @@ public class Notice extends BaseDataEntity {
 
     @ApiModelProperty(value = "创建时间")
     @TableField("create_time")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     @ApiModelProperty(value = "更新者")
     @TableField("update_by")
@@ -62,7 +62,7 @@ public class Notice extends BaseDataEntity {
 
     @ApiModelProperty(value = "更新时间")
     @TableField("update_time")
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     @ApiModelProperty(value = "备注")
     @TableField("remark")
